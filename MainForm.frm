@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin VB.Form MainForm 
-   Caption         =   "ÃÜÂë"
+   Caption         =   "å¯†ç "
    ClientHeight    =   4035
    ClientLeft      =   5040
    ClientTop       =   4620
@@ -9,16 +9,24 @@ Begin VB.Form MainForm
    LinkTopic       =   "Form1"
    ScaleHeight     =   4035
    ScaleWidth      =   6675
-   Begin VB.CommandButton showabout 
-      Caption         =   "¹ØÓÚ/°ïÖú"
+   Begin VB.CommandButton Generate 
+      Caption         =   "ç”Ÿæˆéšæœºå¯†é’¥"
       Height          =   495
-      Left            =   2160
+      Left            =   960
+      TabIndex        =   11
+      Top             =   3240
+      Width           =   1335
+   End
+   Begin VB.CommandButton showabout 
+      Caption         =   "å…³äº/å¸®åŠ©"
+      Height          =   495
+      Left            =   2760
       TabIndex        =   10
       Top             =   3240
       Width           =   1575
    End
    Begin VB.CommandButton Encrypt 
-      Caption         =   "¼ÓÃÜ"
+      Caption         =   "åŠ å¯†"
       Height          =   495
       Left            =   5040
       TabIndex        =   5
@@ -26,7 +34,7 @@ Begin VB.Form MainForm
       Width           =   1215
    End
    Begin VB.CommandButton Decrypt 
-      Caption         =   "½âÃÜ"
+      Caption         =   "è§£å¯†"
       Height          =   495
       Left            =   5040
       TabIndex        =   4
@@ -34,7 +42,7 @@ Begin VB.Form MainForm
       Width           =   1215
    End
    Begin VB.CommandButton Check 
-      Caption         =   "ÃÜÔ¿ÑéÖ¤"
+      Caption         =   "å¯†é’¥éªŒè¯"
       Height          =   495
       Left            =   5040
       TabIndex        =   3
@@ -60,7 +68,7 @@ Begin VB.Form MainForm
       Left            =   840
       TabIndex        =   0
       Top             =   480
-      Width           =   3735
+      Width           =   3855
    End
    Begin VB.Label Label1 
       Caption         =   "powered by ozem"
@@ -71,7 +79,7 @@ Begin VB.Form MainForm
       Width           =   1695
    End
    Begin VB.Label PlainLabel 
-      Caption         =   "Ã÷ÎÄ"
+      Caption         =   "æ˜æ–‡"
       Height          =   495
       Left            =   240
       TabIndex        =   8
@@ -79,7 +87,7 @@ Begin VB.Form MainForm
       Width           =   495
    End
    Begin VB.Label CipherLabel 
-      Caption         =   "ÃÜÎÄ"
+      Caption         =   "å¯†æ–‡"
       Height          =   495
       Left            =   240
       TabIndex        =   7
@@ -87,7 +95,7 @@ Begin VB.Form MainForm
       Width           =   495
    End
    Begin VB.Label keyLabel 
-      Caption         =   "ÃÜÔ¿"
+      Caption         =   "å¯†é’¥"
       Height          =   495
       Left            =   240
       TabIndex        =   6
@@ -111,15 +119,15 @@ For i = 1 To 127
 Next i
 s = Keytext.Text
 If Len(s) <> 26 Then
-    MsgBox "ÃÜÔ¿³¤¶È²»ºÏ·¨"
-    keyLabel.Caption = "ÃÜÔ¿¡Á"
+    MsgBox "å¯†é’¥é•¿åº¦ä¸åˆæ³•"
+    keyLabel.Caption = "å¯†é’¥Ã—"
     Exit Sub
 End If
 For i = 1 To 26
     ch = Mid(s, i, 1)
     If (used(Asc(ch))) Then
-        MsgBox "ÃÜÔ¿²»ºÏ·¨"
-        keyLabel.Caption = "ÃÜÔ¿¡Á"
+        MsgBox "å¯†é’¥ä¸åˆæ³•"
+        keyLabel.Caption = "å¯†é’¥Ã—"
         Exit Sub
     End If
     used(Asc(ch)) = True
@@ -127,29 +135,25 @@ For i = 1 To 26
     unkey(Asc(ch)) = Chr(Asc("a") + i - 1)
 Next i
 flag = True
-keyLabel.Caption = "ÃÜÔ¿¡Ì"
+keyLabel.Caption = "å¯†é’¥âˆš"
 End Sub
 
 Private Sub Ciphertext_Change()
-    CipherLabel.Caption = "ÃÜÎÄ..."
-    PlainLabel.Caption = "Ã÷ÎÄ"
-End Sub
-
-Private Sub Command1_Click()
-
+    CipherLabel.Caption = "å¯†æ–‡..."
+    PlainLabel.Caption = "æ˜æ–‡"
 End Sub
 
 Private Sub Decrypt_Click()
 Dim s As String, ch As String, t As String
 If flag = False Then
-    MsgBox "ÇëÊäÈë²¢ÑéÖ¤ÃÜÔ¿"
-    keyLabel.Caption = "ÃÜÔ¿¡Á"
+    MsgBox "è¯·è¾“å…¥å¹¶éªŒè¯å¯†é’¥"
+    keyLabel.Caption = "å¯†é’¥Ã—"
     Exit Sub
 End If
 s = Ciphertext.Text
 t = ""
 If (Len(s) = 0) Then
-    MsgBox "ÇëÊäÈëÃÜÎÄ"
+    MsgBox "è¯·è¾“å…¥å¯†æ–‡"
     Exit Sub
 End If
 For i = 1 To Len(s)
@@ -157,8 +161,8 @@ For i = 1 To Len(s)
     t = t + unkey(Asc(ch))
 Next i
 Plaintext.Text = t
-PlainLabel.Caption = "Ã÷ÎÄ¡Ì"
-CipherLabel.Caption = "ÃÜÎÄ¡Ì"
+PlainLabel.Caption = "æ˜æ–‡âˆš"
+CipherLabel.Caption = "å¯†æ–‡âˆš"
 End Sub
 
 Private Sub Encrypt_Click()
@@ -166,12 +170,12 @@ Dim s As String, ch As String, t As String
 s = Plaintext.Text
 t = ""
 If flag = False Then
-    MsgBox "ÇëÊäÈë²¢ÑéÖ¤ÃÜÔ¿"
-    keyLabel.Caption = "ÃÜÔ¿¡Á"
+    MsgBox "è¯·è¾“å…¥å¹¶éªŒè¯å¯†é’¥"
+    keyLabel.Caption = "å¯†é’¥Ã—"
     Exit Sub
 End If
 If Len(s) = 0 Then
-    MsgBox "ÇëÊäÈëÃ÷ÎÄ"
+    MsgBox "è¯·è¾“å…¥æ˜æ–‡"
     Exit Sub
 End If
 For i = 1 To Len(s)
@@ -179,8 +183,8 @@ For i = 1 To Len(s)
     t = t + key(Asc(ch))
 Next i
 Ciphertext.Text = t
-PlainLabel.Caption = "Ã÷ÎÄ¡Ì"
-CipherLabel.Caption = "ÃÜÎÄ¡Ì"
+PlainLabel.Caption = "æ˜æ–‡âˆš"
+CipherLabel.Caption = "å¯†æ–‡âˆš"
 End Sub
 
 Private Sub Form_Load()
@@ -190,14 +194,39 @@ For i = 1 To 127
 Next i
 End Sub
 
+Private Sub Generate_Click()
+'If flag Then Exit Sub
+Randomize
+Dim ch As String, s As String
+Dim used(1 To 127) As Boolean
+s = ""
+For i = 1 To 127
+    used(i) = False
+Next i
+For i = 1 To 26
+    ch = Chr(Int(Rnd * 26) + Asc("a"))
+    If (used(Asc(ch))) Then
+        i = i - 1
+    Else
+    used(Asc(ch)) = True
+    key(Asc("a") + i - 1) = ch
+    unkey(Asc(ch)) = Chr(Asc("a") + i - 1)
+    s = s + ch
+    End If
+Next i
+Keytext.Text = s
+keyLabel.Caption = "å¯†é’¥âˆš"
+flag = True
+End Sub
+
 Private Sub Keytext_Change()
-keyLabel.Caption = "ÃÜÔ¿..."
+keyLabel.Caption = "å¯†é’¥..."
 flag = False
 End Sub
 
 Private Sub Plaintext_Change()
-PlainLabel.Caption = "Ã÷ÎÄ..."
-CipherLabel.Caption = "ÃÜÎÄ"
+PlainLabel.Caption = "æ˜æ–‡..."
+CipherLabel.Caption = "å¯†æ–‡"
 End Sub
 
 Private Sub showabout_Click()
